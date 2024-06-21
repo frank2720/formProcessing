@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require __DIR__ . '/inc/header.php';
 
 $errors = [];
@@ -12,6 +12,8 @@ $contacts = [
 $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 if ($request_method === 'GET') {
+    // generate a token
+	$_SESSION['token'] = bin2hex(random_bytes(35));
     // show the form
     require __DIR__ . '/inc/get.php';
 }elseif ($request_method === 'POST') {

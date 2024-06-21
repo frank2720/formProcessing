@@ -24,5 +24,6 @@
     <div>
         <small class="error"><?php echo $errors['contact'] ?? '' ?></small>
     </div>
+    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '' ?>">
     <button type="submit">Subscribe</button>
 </form>

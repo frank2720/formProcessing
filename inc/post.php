@@ -4,6 +4,16 @@ const NAME_REQUIRED = 'Please enter your name';
 const EMAIL_REQUIRED = 'Please enter your email';
 const EMAIL_INVALID = 'Please enter a valid email';
 
+$token = filter_input(INPUT_POST, 'token');
+
+if (!$token || $token !== $_SESSION['token']) {
+    // show an error message
+    echo '<p class="error">Error: invalid form submission</p>';
+    // return 405 http status code
+    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+    exit;
+}
+
 // sanitize and validate name
 $name = filter_input(INPUT_POST, 'name');
 $inputs['name'] = $name;
