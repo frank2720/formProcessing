@@ -1,24 +1,14 @@
 <?php
 
-/*-----------------------------------------------------
-// WARNING: this doesn't include sanitization
-// and validation
-//-----------------------------------------------------
+if (filter_has_var(INPUT_GET, 'id')) {
+	// sanitize id
+	$clean_id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
-if (isset($_POST['name'], $_POST['email'])) {
-	$name = htmlspecialchars($_POST['name']);
-	$email = htmlspecialchars($_POST['email']);
+	// validate id
+	$id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
-	// show the $name and $email
-	echo "Thanks $name for your subscription.<br>";
-	echo "Please confirm it in your inbox of the email $email.";
+	// show the id if it's valid
+	echo $id === false ? 'Invalid id' : $id;
 } else {
-	echo 'You need to provide your name and email address.';
-}*/
-
-if (filter_has_var(INPUT_POST,'name')&&filter_has_var(INPUT_POST,'email')) {
-    echo 'Thanks '.htmlspecialchars($_POST['name']) .' for your subscription.<br>';
-	echo "Please confirm it in your inbox of the email ".htmlspecialchars($_POST['email']);
-} else {
-    echo 'You need to provide your name and email address.';
+	echo 'id is required.';
 }
