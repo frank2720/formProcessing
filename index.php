@@ -4,6 +4,10 @@ require __DIR__ . '/inc/header.php';
 
 $errors = [];
 $inputs = [];
+$contacts = [
+	'email' => 'Email',
+	'phone' => 'Phone'
+];
 
 $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 

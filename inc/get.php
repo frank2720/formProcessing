@@ -13,5 +13,16 @@
         <input type="text" name="email" id="email" placeholder="Email Address" value="<?php echo $inputs['email'] ?? '' ?>" class="<?php echo isset($errors['email']) ? 'error' : '' ?>">
         <small><?php echo $errors['email'] ?? '' ?></small>
     </div>
+
+    <div>Please choose your preferred method of contact:</div>
+    <?php foreach ($contacts as $key => $value) : ?>
+        <div>
+            <input type="radio" name="contact" id="contact_<?php echo $key ?>" value="<?php echo $key ?>" />
+            <label for="contact_<?php echo $key ?>"><?php echo $value ?></label>
+        </div>
+    <?php endforeach ?>
+    <div>
+        <small class="error"><?php echo $errors['contact'] ?? '' ?></small>
+    </div>
     <button type="submit">Subscribe</button>
 </form>

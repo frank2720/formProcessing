@@ -30,6 +30,17 @@ if ($email) {
 } else {
     $errors['email'] = EMAIL_REQUIRED;
 }
+
+// sanitize the contact
+$contact = filter_input(INPUT_POST, 'contact');
+
+// check the selected value against the original values
+if ($contact && array_key_exists($contact, $contacts)) {
+	$contact = htmlspecialchars($contact);
+} else {
+	$errors['contact'] = 'Please select at least an option.';
+}
+
 ?>
 
 <?php if (count($errors) === 0) : ?>
@@ -43,5 +54,10 @@ if ($email) {
             <li>Click to confirm - Click on the link in the email to confirm your subscription.</li>
         </ol>
     </section>
+
+    <?php echo <<<html
+	You selected to be contacted via <strong> $contact</strong>.
+	<a href="index.php">Back to the form</a>
+	html; ?>
 
 <?php endif ?>
