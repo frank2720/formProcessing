@@ -4,7 +4,7 @@ const NAME_REQUIRED = 'Please enter your name';
 const EMAIL_REQUIRED = 'Please enter your email';
 const EMAIL_INVALID = 'Please enter a valid email';
 
-$token = filter_input(INPUT_POST, 'token');
+$token = htmlspecialchars($_POST['token']);
 
 if (!$token || $token !== $_SESSION['token']) {
     // show an error message
@@ -15,7 +15,7 @@ if (!$token || $token !== $_SESSION['token']) {
 }
 
 // sanitize and validate name
-$name = filter_input(INPUT_POST, 'name');
+$name = htmlspecialchars($_POST['name']);
 $inputs['name'] = $name;
 
 if ($name) {
@@ -55,9 +55,7 @@ if ($contact && array_key_exists($contact, $contacts)) {
 
 <?php if (count($errors) === 0) : ?>
     <section>
-        <h2>
-            Thanks <?php echo htmlspecialchars($name) ?> for your subscription!
-        </h2>
+        <?php flash('greeting') ?>
         <p>Please follow the steps below to complete your subscription:</p>
         <ol>
             <li>Check your email (<?php echo htmlspecialchars($email) ?>) - Find the message sent from webmaster@phptutorial.net</li>

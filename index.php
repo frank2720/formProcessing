@@ -1,5 +1,6 @@
 <?php
 session_start();
+require __DIR__  . '/inc/flash.php';
 require __DIR__ . '/inc/header.php';
 
 $errors = [];
@@ -10,6 +11,8 @@ $contacts = [
 ];
 
 $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
+
+flash('greeting', "Hello, Thanks for your subscription!", FLASH_SUCCESS);
 
 if ($request_method === 'GET') {
     // generate a token
